@@ -14,6 +14,22 @@ def index(request):
     return JsonResponse(books_json, safe=False)
 
 
+def book_list(request):
+    books = Book.objects.all()
+    context = {
+        "books": books,
+    }
+    return render(request, "book_list.html", context)
+
+def book_details(request, pk):
+    book = Book.objects.get(id=pk)
+    context = {
+        "book": book,
+    }
+    return render(request, "book_details.html", context)
+
+
+
 # TODO:
 # List View
 # Details View
