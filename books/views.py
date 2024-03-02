@@ -21,6 +21,7 @@ def book_list(request):
     }
     return render(request, "book_list.html", context)
 
+
 def book_details(request, pk):
     book = Book.objects.get(id=pk)
     context = {
@@ -28,6 +29,9 @@ def book_details(request, pk):
     }
     return render(request, "book_details.html", context)
 
+
+def dashboard(request):
+    return render(request, "profile.html")
 
 
 # TODO:
