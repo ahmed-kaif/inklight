@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.core import serializers
 from django.http import HttpResponse, JsonResponse
-from .models import Book
+from .models import Book, Review
 
 # Create your views here.
 
@@ -24,8 +24,10 @@ def book_list(request):
 
 def book_details(request, pk):
     book = Book.objects.get(id=pk)
+    reviews = Review.objects.filter(book__id=book.id)
     context = {
         "book": book,
+        "reviews": reviews,
     }
     return render(request, "book_details.html", context)
 

@@ -1,0 +1,26 @@
+.rating {
+  display: inline-block;
+  unicode-bidi: bidi-override;
+  color: lightgrey;
+  font-size: 30px;
+  width: 30px;
+  margin-right: 3px;
+}
+
+.rating:hover,
+.rating:hover ~ .rating {
+  color: #f39c12;
+}
+
+.rating.filled,
+.rating.filled ~ .rating {
+  color: #f39c12;
+}
+
+.test {
+  border: 5px solid black;
+}
+
+body {
+  background-color: red;
+}

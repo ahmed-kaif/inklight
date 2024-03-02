@@ -1,7 +1,7 @@
 from django.contrib import admin
 from import_export import resources, fields, widgets
 from import_export.admin import ImportExportModelAdmin
-from .models import Book, Author, Category, Review
+from .models import Book, Author, Category, Review, Sentiment
 
 # Register your models here.
 
@@ -39,3 +39,5 @@ class BookAdmin(ImportExportModelAdmin):
 admin.site.register(Book, BookAdmin)
 admin.site.register(Author)
 admin.site.register(Category)
+admin.site.register(Review)
+admin.site.register(Sentiment)

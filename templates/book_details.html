@@ -1,12 +1,57 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ book.title }}</title>
-</head>
-<body>
-    <h1>{{ book.title }}</h1>
+{% extends 'base.html' %}
+{% load humanize %}
+    {% block content %}
+    <div class="row">
+        <div class="col-md-3 col-12">
+            <!-- Book Cover Image -->
+            <img src="{{book.image}}" class="img-fluid" alt="Book Cover">
+        </div>
+        <div class="col-md-9 col-12">
+            <!-- Book Details -->
+            <h2 class="mt-2">{{book.title}}</h2>
+            <p><strong>Authors:</strong>
+                {% for author in book.authors.all %}
+                {{ author.name }}
+            {% endfor %}
+            </p>
+            
+            <p><strong>Publisher:</strong> {{book.publisher}}</p>
+    </div>
+     <!-- Book Description -->
+     <h5 class="mt-4 test">Description</h5>
+     <p>{{book.description}}</p>
+     
+     <!-- Reviews -->
+     <h5 class="mt-4">Reviews</h5>
+     {% for review in reviews %}
+     <div class="card mb-3">
+         <div class="card-body">
+             <div class="d-flex justify-content-between">
+                 <div class="d-flex align-items-center">
+                     <!-- User Avatar -->
+                     <img src="user_avatar.jpg" class="rounded-circle me-2" alt="User Avatar" style="width: 40px; height: 40px;">
+                     <!-- Username -->
+                     <div class="flex-column">
+                         <p class="mb-0">{{review.user}}</p>
+                     <small class="text-muted">{{review.created_at | naturaltime }}</small>
+                     </div>
+
+                 </div>
+                 <!-- Rating Stars -->
+                 {% include "partials/ratings.html" %}
+             </div>
+             <!-- Review Text -->
+             <p class="card-text mt-3">{{review.text}}</p>
+             <!-- Relative Time Description -->
+         </div>
+     </div>
+     {% endfor %}
+     <!-- Additional Details (Add more properties as needed) -->
+     <!-- <p><strong>ISBN:</strong> 123456789</p>
+     <p><strong>Genre:</strong> Fiction</p>
+     <p><strong>Pages:</strong> 300</p> -->
+ </div>
+    {% comment %} <h1>{{ book.title }}</h1>
     <ul> 
         <li> Author: {% for author in book.authors.all %}
                 {{ author.name }}  
@@ -22,6 +67,9 @@
         {{ book.description }}
     </p>
     <img src="{{book.image}}" alt="Book Image">
-   
-</body>
-</html>
+    <h2>All Reviews</h2>
+    {% for review in reviews %}
+        <p> {{review.user}} </p>
+        <p>{{review.text}}</p>
+    {% endfor %} {% endcomment %}
+{%endblock%}

@@ -1,17 +1,24 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Books</title>
-</head>
-<body>
+    {%extends 'base.html' %}
+    {% block content%}
     <h1>All Books</h1>
-    <ul> 
+    <div class="row">
         {% for book in books %}
-            <li><a href="/books/{{book.id}}">{{book.title}}</a></li>
+          <div class="col-12 col-md-4">
+            <div class="card" style="width: 18rem;">
+                <img src="{{book.image}}" class="card-img-top contain" height="250px" alt="{{book.title}}">
+                <div class="card-body">
+                  <h5 class="card-title">{{book.title}}</h5>
+                  <p class="card-text">
+                    {% for author in book.authors.all %}
+                {{ author.name }}  
+                    {% endfor %}
+                  </p>
+                </div>
+                <div class="card-body">
+                  <a href="/books/{{book.id}}" class="card-link">View Details</a>
+                </div>
+              </div>
+            </div>
         {% endfor %}
-    </ul>
-   
-</body>
-</html>
+      </div>
+    {%endblock%}
