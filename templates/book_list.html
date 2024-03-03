@@ -3,9 +3,9 @@
     <h1>All Books</h1>
     <div class="row">
         {% for book in books %}
-          <div class="col-12 col-md-4">
-            <div class="card" style="width: 18rem;">
-                <img src="{{book.image}}" class="card-img-top contain" height="250px" alt="{{book.title}}">
+          <div class="col-12 col-md-3">
+            <div class="card mb-4">
+                <img src="{{book.image}}" class="card-img-top contain" height="300px" alt="{{book.title}}">
                 <div class="card-body">
                   <h5 class="card-title">{{book.title}}</h5>
                   <p class="card-text">
@@ -14,8 +14,8 @@
                     {% endfor %}
                   </p>
                 </div>
-                <div class="card-body">
-                  <a href="/books/{{book.id}}" class="card-link">View Details</a>
+                <div class="d-grid card-body">
+                  <a href="/books/{{book.id}}" class="btn btn-outline-dark">View Details</a>
                 </div>
               </div>
             </div>

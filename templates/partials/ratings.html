@@ -1,5 +1,5 @@
 <div id="rating-container">
-    {% for i in "12345" %}
-        <span class="rating {% if i <= user_rating %}filled{% endif %}">★</span>
+    {% for i in "54321" %}
+        <span class="rating {% if i <= review.rating %}filled{% endif %}">★</span>
     {% endfor %}
 </div>

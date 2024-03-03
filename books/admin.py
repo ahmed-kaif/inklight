@@ -1,7 +1,7 @@
 from django.contrib import admin
 from import_export import resources, fields, widgets
 from import_export.admin import ImportExportModelAdmin
-from .models import Book, Author, Category, Review, Sentiment
+from .models import Book, Author, Category, Review, Sentiment, CustomUser
 
 # Register your models here.
 
@@ -36,6 +36,7 @@ class BookAdmin(ImportExportModelAdmin):
     resource_classes = [BookResource]
 
 
+admin.site.register(CustomUser)
 admin.site.register(Book, BookAdmin)
 admin.site.register(Author)
 admin.site.register(Category)
