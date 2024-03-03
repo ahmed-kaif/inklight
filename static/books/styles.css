@@ -16,11 +16,3 @@
 .rating.filled ~ .rating {
   color: #f39c12;
 }
-
-.test {
-  border: 5px solid black;
-}
-
-body {
-  background-color: red;
-}

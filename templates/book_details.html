@@ -57,19 +57,23 @@
      <!-- <p><strong>ISBN:</strong> 123456789</p>
      <p><strong>Genre:</strong> Fiction</p>
      <p><strong>Pages:</strong> 300</p> -->
+     {% if form %}   
         <h4 class="mt-4">Add Review</h4>
         <hr>
-        {% if user.is_authenticated %}
-        <form method="post" action="{% url 'book-details' pk=book.id %}">
-            {% csrf_token %}
-            {{ form|crispy}}
-            <div class="d-grid">
-                <button type="submit" class="btn btn-dark">Submit</button>
-            </div>
-        </form>
-        {% else %}
-            <p>Please <a href="{% url 'login' %}">log in</a> to submit a review.</p>
-        {% endif %}
+        
+            {% if user.is_authenticated %}
+            <form method="post" action="{% url 'book-details' pk=book.id %}">
+                {% csrf_token %}
+                {{ form|crispy}}
+                <div class="d-grid">
+                    <button type="submit" class="btn btn-dark">Submit</button>
+                </div>
+            </form>
+            {% else %}
+                <p>Please <a href="{% url 'login' %}">log in</a> to submit a review.</p>
+            {% endif %}
+    {% endif %}
+        
     </div>
 {%endblock%}
 

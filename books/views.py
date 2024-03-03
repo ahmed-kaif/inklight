@@ -56,7 +56,7 @@ def index(request):
 
 
 def book_list(request):
-    books = Book.objects.all()
+    books = Book.objects.order_by("title")
     context = {
         "books": books,
     }
@@ -66,6 +66,7 @@ def book_list(request):
 def book_details(request, pk):
     book = Book.objects.get(id=pk)
     reviews = Review.objects.filter(book__id=book.id)
+    user_reviews = Review.objects.filter(user=request.user, book=book)
 
     if request.method == "POST":
         form = ReviewForm(request.POST)
@@ -77,11 +78,14 @@ def book_details(request, pk):
             return redirect("book-details", pk=book.id)
     else:
         form = ReviewForm()
+
+    #  if user has review then dont pass the form
     context = {
         "book": book,
         "reviews": reviews,
-        "form": form,
     }
+    if not user_reviews.exists():
+        context["form"] = form
     return render(request, "book_details.html", context)
 
 
@@ -107,7 +111,7 @@ def search_books(request):
 
 
 def author_list(request):
-    authors = Author.objects.all()
+    authors = Author.objects.order_by("name")
     context = {
         "authors": authors,
     }
@@ -115,11 +119,35 @@ def author_list(request):
 
 
 def category_list(request):
-    genres = Category.objects.all()
+    categories = Category.objects.order_by("name")
     context = {
-        "genres": genres,
+        "categories": categories,
     }
     return render(request, "category_list.html", context)
+
+
+def books_by_author(request, author_name):
+    # Retrieve books based on author name
+    books = Book.objects.filter(authors__name__icontains=author_name)
+
+    context = {
+        "author_name": author_name,
+        "books": books,
+    }
+
+    return render(request, "books/books_by_author.html", context)
+
+
+def books_by_category(request, category_name):
+    # Retrieve books based on genre name
+    books = Book.objects.filter(categorys__name__icontains=category_name)
+
+    context = {
+        "category_name": category_name,
+        "books": books,
+    }
+
+    return render(request, "books/books_by_category.html", context)
 
 
 def dashboard(request):
