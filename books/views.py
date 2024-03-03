@@ -3,6 +3,7 @@ from django.http import HttpResponse, JsonResponse
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.decorators import login_required
 from django.db.models import Q
+from django.core.paginator import Paginator
 
 
 from .models import Book, Review, Author, Category
@@ -56,7 +57,13 @@ def index(request):
 
 
 def book_list(request):
-    books = Book.objects.order_by("title")
+    all_books_list = Book.objects.order_by("title")
+    books_per_page = 36
+
+    # Paginate the books
+    paginator = Paginator(all_books_list, books_per_page)
+    page = request.GET.get("page", 1)
+    books = paginator.get_page(page)
     context = {
         "books": books,
     }
@@ -66,7 +73,7 @@ def book_list(request):
 def book_details(request, pk):
     book = Book.objects.get(id=pk)
     reviews = Review.objects.filter(book__id=book.id)
-    user_reviews = Review.objects.filter(user=request.user, book=book)
+    user_reviews = Review.objects.filter(user=request.user.id, book=book)
 
     if request.method == "POST":
         form = ReviewForm(request.POST)
@@ -83,6 +90,7 @@ def book_details(request, pk):
     context = {
         "book": book,
         "reviews": reviews,
+        "stars": [1, 2, 3, 4, 5],
     }
     if not user_reviews.exists():
         context["form"] = form
@@ -150,8 +158,17 @@ def books_by_category(request, category_name):
     return render(request, "books/books_by_category.html", context)
 
 
-def dashboard(request):
-    return render(request, "profile.html")
+@login_required
+def profile(request):
+    user_reviews = Review.objects.filter(user=request.user)
+    reviewed_books = Book.objects.filter(
+        id__in=user_reviews.values_list("book_id", flat=True)
+    )
+    context = {
+        "books": reviewed_books,
+    }
+
+    return render(request, "profile.html", context)
 
 
 # TODO:

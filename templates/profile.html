@@ -1,4 +1,33 @@
-{% load account %}
-{% user_display user %}
+{% extends "base.html" %}
+{% block content %}
 
-<p>In case you forgot, your username is {{ user }}.</p>
+<div class="container mt-5">
+    <h2>Your Profile</h2>
+    <hr>
+    <div class="row">
+        <div class="col-md-6">
+            <dl class="row">
+                <dt class="col-sm-3">Username:</dt>
+                <dd class="col-sm-9">{{ request.user.username }}</dd>
+
+                <dt class="col-sm-3">Email:</dt>
+                <dd class="col-sm-9">{{ request.user.email }}</dd>
+            </dl>
+        </div>
+    </div>
+    <h3>Recommended Books for You</h3>
+    <hr>
+    <p>Book 1</p>
+    <p>book 2</p>
+    {% if books %}
+        <h3>Reviewed Books</h3>
+        <hr>
+        {% include "./partials/book_list.html" %}
+    {% endif %}
+   
+</div>
+
+
+
+{% endblock content %}
+

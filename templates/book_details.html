@@ -7,18 +7,26 @@
     <div class="row">
         <div class="col-md-3 col-12">
             <!-- Book Cover Image -->
-            <img src="{{book.image}}" class="img-fluid" alt="Book Cover">
+            <img src="{{book.image}}" class="card-img-top contain" alt="Book Cover">
         </div>
         <div class="col-md-9 col-12">
             <!-- Book Details -->
-            <h2 class="mt-2">{{book.title}}</h2>
-            <p><strong>Authors:</strong>
-                {% for author in book.authors.all %}
-                {{ author.name }}
-            {% endfor %}
-            </p>
+            <h2>{{book.title}}</h2>
+            <div class="mt-3">
+                <h6><strong>Authors:</strong>
+                    {% for author in book.authors.all %}
+                    {{ author.name }}
+                {% endfor %}
+                </h6>
+                
+                <h6><strong>Publisher:</strong> {{book.publisher}}</h6>
+                <h6><strong>Published At:</strong> {{book.published_at}}</h6>
+                <hr>
+                {% for category in book.categories.all %}
+                <span class="badge rounded-pill bg-dark py-2">{{category.name}}</span>
+                {% endfor %}
+            </div>
             
-            <p><strong>Publisher:</strong> {{book.publisher}}</p>
     </div>
      <!-- Book Description -->
      <h4 class="mt-4">Description</h4>
@@ -29,7 +37,7 @@
      <h4 class="mt-4">Reviews</h4>
      <hr>
      {% for review in reviews %}
-     <div class="card mb-3">
+     <div class="card mb-3 {% if review.user == user %}border-dark{% endif %}">
          <div class="card-body">
              <div class="d-flex justify-content-between">
                  <div class="d-flex align-items-center">
@@ -43,7 +51,7 @@
 
                  </div>
                  <!-- Rating Stars -->
-                 {% include "./partials/ratings.html" %}
+                 {% include "./partials/ratings.html" with rating=review.rating stars=stars %}
              </div>
              <!-- Review Text -->
              <div class=" mt-3 truncate-container">
@@ -52,6 +60,8 @@
             </div>
          </div>
      </div>
+     {% empty %}
+        <div class="text-center">No reviews yet.</div>
      {% endfor %}
      <!-- Additional Details (Add more properties as needed) -->
      <!-- <p><strong>ISBN:</strong> 123456789</p>

@@ -1,12 +1,17 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <ul>
+<h2>All Authors</h2>
+    <hr>
+    <div class="row">
         {% for author in authors %}
-            <li><a href="{% url 'books_by_author' author_name=author.name %}">{{author.name}}</a></li>
+            <div class="col-12 col-md-3 mb-2">
+                {% include "./partials/author_partial.html" with author=author %}
+            </div>
+            {% comment %} <li><a href="{% url 'books_by_author' author_name=author.name %}">{{author.name}}</a></li> {% endcomment %}
         {% endfor %}
     
-    </ul>    
+    </div>    
 {% endblock content %}
 
 {{author.name}}

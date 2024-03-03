@@ -7,16 +7,59 @@
   margin-right: 3px;
 }
 
-.rating:hover,
-.rating:hover ~ .rating {
-  color: #f39c12;
-}
-
-.rating.filled,
-.rating.filled ~ .rating {
+.filled {
   color: #f39c12;
 }
 
 body {
-  background-color: beige;
+  background-color: #f7f3f1;
+}
+
+.pagination {
+  justify-content: center;
+}
+
+.page-link {
+  color: #0e1012; /* Change this to your desired text color */
+  background-color: #fff; /* Change this to your desired background color */
+  border-color: #e2e2e2; /* Change this to your desired border color */
+}
+
+.page-link:hover {
+  color: #fff; /* Change this to your desired text color on hover */
+  background-color: #0e1012; /* Change this to your desired background color on hover */
+  border-color: #0e1012; /* Change this to your desired border color on hover */
+}
+
+.page-item.active .page-link {
+  color: #fff; /* Change this to your desired text color for the active page */
+  background-color: #0e1012; /* Change this to your desired background color for the active page */
+  border-color: #0e1012; /* Change this to your desired border color for the active page */
+}
+
+.avatar {
+  height: 56px;
+  width: 56px;
+  color: darkslategrey;
+}
+
+.author-container {
+  padding: 15px;
+  border: 1px solid transparent;
+}
+
+.author-container:hover {
+  border: 1px solid darkslategrey;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.author-title {
+  color: darkslategrey;
+  text-decoration: none !important;
+}
+
+.author-title:hover {
+  text-decoration: underline;
+  color: #0e1012;
 }

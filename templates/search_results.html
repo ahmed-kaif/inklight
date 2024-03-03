@@ -11,21 +11,25 @@
     </form>
 
     {% if results %}
+    <div class="text-center">
+        Found {{results|length}} Results
+    </div>
+    <hr>
     <div class="row mt-3">
         {% for book in results %}
             <div class="col-12 col-md-3">
-                <div class="card mb-4">
+                <div class="card border-0 rounded-3 shadow-sm mb-4">
                     <img src="{{book.image}}" class="card-img-top contain" height="300px" alt="{{book.title}}">
                     <div class="card-body">
-                      <h5 class="card-title">{{book.title}}</h5>
-                      <p class="card-text">
+                      <h5 class="card-title text-truncate">{{book.title}}</h5>
+                      <p class="card-text text-truncate">
                         {% for author in book.authors.all %}
                     {{ author.name }}  
                         {% endfor %}
                       </p>
                     </div>
                     <div class="d-grid card-body">
-                      <a href="/books/{{book.id}}" class="btn btn-outline-dark">View Details</a>
+                      <a href="/books/{{book.id}}" class="btn btn-dark">View Details</a>
                     </div>
                   </div>
                 </div>

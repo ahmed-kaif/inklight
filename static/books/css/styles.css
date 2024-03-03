@@ -1,5 +1,3 @@
-@import url("https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&display=swap");
-
 .rating {
   display: inline-block;
   unicode-bidi: bidi-override;
@@ -9,31 +7,33 @@
   margin-right: 3px;
 }
 
-.rating:hover,
-.rating:hover ~ .rating {
-  color: #f39c12;
-}
-
-.rating.filled,
-.rating.filled ~ .rating {
+.filled {
   color: #f39c12;
 }
 
 body {
-  background-color: beige;
-  font-family: "Nunito Sans", sans-serif;
+  /* background-color: beige; */
+  background-image: "../img/bg.png";
 }
 
-/* styles.css */
-
-.truncate {
-  overflow: hidden;
-  display: -webkit-box;
-  -webkit-line-clamp: 3; /* Number of lines to show */
-  -webkit-box-orient: vertical;
+.pagination {
+  justify-content: center;
 }
 
-.see-more-button {
-  cursor: pointer;
-  color: #007bff; /* Bootstrap's primary color */
+.page-link {
+  color: #0e1012; /* Change this to your desired text color */
+  background-color: #fff; /* Change this to your desired background color */
+  border-color: #e2e2e2; /* Change this to your desired border color */
+}
+
+.page-link:hover {
+  color: #fff; /* Change this to your desired text color on hover */
+  background-color: #0e1012; /* Change this to your desired background color on hover */
+  border-color: #0e1012; /* Change this to your desired border color on hover */
+}
+
+.page-item.active .page-link {
+  color: #fff; /* Change this to your desired text color for the active page */
+  background-color: #0e1012; /* Change this to your desired background color for the active page */
+  border-color: #0e1012; /* Change this to your desired border color for the active page */
 }

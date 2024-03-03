@@ -1,24 +1,13 @@
 {%extends 'base.html' %}
   {% block content%}
-    <h1>All Books</h1>
-    <div class="row">
-        {% for book in books %}
-          <div class="col-12 col-md-3">
-            <div class="card mb-4">
-                <img src="{{book.image}}" class="card-img-top contain" height="300px" alt="{{book.title}}">
-                <div class="card-body">
-                  <h5 class="card-title">{{book.title}}</h5>
-                  <p class="card-text">
-                    {% for author in book.authors.all %}
-                {{ author.name }}  
-                    {% endfor %}
-                  </p>
-                </div>
-                <div class="d-grid card-body">
-                  <a href="/books/{{book.id}}" class="btn btn-outline-dark">View Details</a>
-                </div>
-              </div>
-            </div>
-        {% endfor %}
-      </div>
+    <h2>All Books</h2>
+    <hr>
+    {% if books %}
+    {% include "./books/books_paginate.html" %}
+      {% include "./partials/book_list.html" %}
+      {% include "./books/books_paginate.html" %}
+    {% else %}
+      <p class="text-center">No books found.</p>
+    {% endif %}
+   
     {%endblock%}
