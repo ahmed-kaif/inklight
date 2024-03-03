@@ -40,6 +40,8 @@ INSTALLED_APPS = [
     "books.apps.BooksConfig",
     "import_export",
     "django.contrib.humanize",
+    "crispy_forms",
+    "crispy_bootstrap5",
 ]
 
 MIDDLEWARE = [
@@ -138,3 +140,6 @@ STATICFILES_DIR = [BASE_DIR / "static"]
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 LOGIN_REDIRECT_URL = "book-list"
+CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
+
+CRISPY_TEMPLATE_PACK = "bootstrap5"

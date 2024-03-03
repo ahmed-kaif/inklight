@@ -1,26 +1,17 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse, JsonResponse
-from django.contrib.auth import login, authenticate
+from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.decorators import login_required
-
-from .models import Book, Review
-from .forms import CustomUserCreationForm, CustomAuthenticationForm, ReviewForm
+from django.db.models import Q
 
 
-@login_required
-def submit_review(request, book_id):
-    book = Book.objects.get(pk=book_id)
-
-    if request.method == "POST":
-        form = ReviewForm(request.POST)
-        if form.is_valid():
-            review = form.save(commit=False)
-            review.user = request.user
-            review.book = book
-            review.save()
-            return redirect("book_detail", book_id=book.id)
-    else:
-        form = ReviewForm()
+from .models import Book, Review, Author, Category
+from .forms import (
+    CustomUserCreationForm,
+    CustomAuthenticationForm,
+    ReviewForm,
+    BookSearchForm,
+)
 
 
 def register_view(request):
@@ -49,6 +40,11 @@ def login_view(request):
         form = CustomAuthenticationForm()
 
     return render(request, "registration/login.html", {"form": form})
+
+
+def logout_user(request):
+    logout(request)
+    return redirect("book-list")
 
 
 def index(request):
@@ -87,6 +83,43 @@ def book_details(request, pk):
         "form": form,
     }
     return render(request, "book_details.html", context)
+
+
+def search_books(request):
+    query = request.GET.get("query", "")
+    results = []
+
+    if query:
+        results = Book.objects.filter(
+            Q(title__icontains=query)
+            | Q(publisher__icontains=query)
+            | Q(authors__name__icontains=query)
+        ).distinct()
+
+    form = BookSearchForm(initial={"query": query})
+
+    context = {
+        "form": form,
+        "results": results,
+    }
+
+    return render(request, "search_results.html", context)
+
+
+def author_list(request):
+    authors = Author.objects.all()
+    context = {
+        "authors": authors,
+    }
+    return render(request, "author_list.html", context)
+
+
+def category_list(request):
+    genres = Category.objects.all()
+    context = {
+        "genres": genres,
+    }
+    return render(request, "category_list.html", context)
 
 
 def dashboard(request):

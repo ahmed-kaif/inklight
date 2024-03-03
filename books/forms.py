@@ -20,8 +20,12 @@ class ReviewForm(forms.ModelForm):
         model = Review
         fields = ["rating", "text"]
 
-    widgets = {
-        "text": forms.Textarea(
-            attrs={"rows": 4, "placeholder": "Write your review here..."}
-        ),
-    }
+    # widgets = {
+    #     "text": forms.Textarea(
+    #         attrs={"rows": 4, "placeholder": "Write your review here..."}
+    #     ),
+    # }
+
+
+class BookSearchForm(forms.Form):
+    query = forms.CharField(label="Search Books", max_length=100)

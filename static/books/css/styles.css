@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&display=swap");
+
 .rating {
   display: inline-block;
   unicode-bidi: bidi-override;
@@ -19,4 +21,19 @@
 
 body {
   background-color: beige;
+  font-family: "Nunito Sans", sans-serif;
+}
+
+/* styles.css */
+
+.truncate {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 3; /* Number of lines to show */
+  -webkit-box-orient: vertical;
+}
+
+.see-more-button {
+  cursor: pointer;
+  color: #007bff; /* Bootstrap's primary color */
 }
