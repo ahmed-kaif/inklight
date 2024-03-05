@@ -1,5 +1,4 @@
-{% load static %}
-<div class="author-container text-center text-truncate" onclick="location.href='{% url 'books_by_author' author_name=author.name %}'">
+<div class="author-container text-center text-truncate" onclick="location.href='{% url 'books_by_author' name=author.name %}'">
 
     <div class="avatar mx-auto">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">

@@ -4,6 +4,10 @@ from django.contrib.auth.models import (
     PermissionsMixin,
 )
 from django.db import models
+from django.urls import reverse
+from textblob import TextBlob
+from django.template.defaultfilters import slugify
+
 
 # Create your models here.
 
@@ -48,7 +52,7 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
 
 
 class Author(models.Model):
-    name = models.CharField(max_length=100)
+    name = models.CharField(max_length=200)
 
     def __str__(self):
         return self.name
@@ -63,13 +67,25 @@ class Category(models.Model):
 
 class Book(models.Model):
     title = models.CharField(max_length=200)
+    slug = models.SlugField(null=True, blank=True)
     description = models.TextField(null=True)
     authors = models.ManyToManyField(Author, blank=True)
     categories = models.ManyToManyField(Category, blank=True)
-    image = models.CharField(max_length=300, blank=True)
+    image = models.URLField(null=True, blank=True)
     publisher = models.CharField(max_length=100)
     published_at = models.CharField(max_length=20, null=True, blank=True)
+    no_of_pages = models.PositiveSmallIntegerField(null=True, blank=True)
+    isbn = models.CharField(max_length=20, null=True, blank=True)
+    total_review = models.PositiveIntegerField(null=True, blank=True)
     imported = models.BooleanField(default=False)
+
+    def save(self, *args, **kwargs):
+        if not self.id:
+            self.slug = slugify(self.title)
+        super(Book, self).save(*args, **kwargs)
+
+    def get_absolute_url(self):
+        return reverse("book-details", kwargs={"slug": self.slug})
 
     def __str__(self):
         return self.title
@@ -93,5 +109,44 @@ class Review(models.Model):
     )
     created_at = models.DateTimeField(auto_now_add=True)
 
+    def save(self, *args, **kwargs):
+        # Perform sentiment analysis after saving the review
+        super().save(*args, **kwargs)
+
+        if not self.sentiment and self.text:
+            # Use TextBlob for sentiment analysis
+            analysis = TextBlob(self.text)
+
+            # Map polarity scores to sentiment labels
+            sentiment_mapping = {
+                "very negative": -1.0,
+                "negative": -0.5,
+                "neutral": 0.0,
+                "positive": 0.5,
+                "very positive": 1.0,
+            }
+
+            # Get the sentiment label based on the polarity score
+            sentiment_score = analysis.sentiment.polarity
+            sentiment_label = max(
+                sentiment_mapping,
+                key=lambda k: (
+                    sentiment_mapping[k]
+                    if sentiment_mapping[k] <= sentiment_score
+                    else float("-inf")
+                ),
+            )
+
+            # Create or retrieve the Sentiment model instance
+            sentiment, created = Sentiment.objects.get_or_create(
+                title=sentiment_label, value=sentiment_mapping[sentiment_label]
+            )
+
+            # Assign the sentiment to the review
+            self.sentiment = sentiment
+
+            # Save the review again with the sentiment
+            super().save(*args, **kwargs)
+
     def __str__(self):
-        return f"Review for {self.book.title}"
+        return f"{self.user.username} - {self.book.title} - {self.sentiment}"

@@ -1,12 +1,12 @@
 {% extends "../base.html" %}
 {% block content %}
 
-<h2>Books by {{ author_name }}</h2>
+<h2>Books by {{ name }}</h2>
 
 {% if books %}
     {% include "../partials/book_list.html" %}
 {% else %}
-    <p>No books found for {{ author_name }}.</p>
+    <p>No books found for {{ name }}.</p>
 {% endif %}
 
 {% endblock content %}

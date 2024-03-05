@@ -6,9 +6,7 @@
             <div class="card-body">
               <h5 class="card-title text-truncate">{{book.title}}</h5>
               <p class="card-text text-truncate">
-                {% for author in book.authors.all %}
-            {{ author.name }}  
-                {% endfor %}
+                  {{ book.authors.all|join:", "}}  
               </p>
             </div>
             <div class="d-grid card-body">

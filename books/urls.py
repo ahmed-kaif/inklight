@@ -13,7 +13,7 @@ urlpatterns = [
     path("books/<int:pk>", views.book_details, name="book-details"),
     path("books/search/", views.search_books, name="search_books"),
     path(
-        "books/author/<str:author_name>/",
+        "books/author/<str:name>/",
         views.books_by_author,
         name="books_by_author",
     ),

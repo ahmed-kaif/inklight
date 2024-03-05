@@ -14,9 +14,7 @@
             <h2>{{book.title}}</h2>
             <div class="mt-3">
                 <h6><strong>Authors:</strong>
-                    {% for author in book.authors.all %}
-                    {{ author.name }}
-                {% endfor %}
+                    {{ book.authors.all|join:", "}}
                 </h6>
                 
                 <h6><strong>Publisher:</strong> {{book.publisher}}</h6>

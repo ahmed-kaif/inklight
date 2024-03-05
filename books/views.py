@@ -119,7 +119,8 @@ def search_books(request):
 
 
 def author_list(request):
-    authors = Author.objects.order_by("name")
+    authors = Author.objects.all()
+    print(authors)
     context = {
         "authors": authors,
     }
@@ -134,12 +135,12 @@ def category_list(request):
     return render(request, "category_list.html", context)
 
 
-def books_by_author(request, author_name):
+def books_by_author(request, name):
     # Retrieve books based on author name
-    books = Book.objects.filter(authors__name__icontains=author_name)
+    books = Book.objects.filter(authors__name__icontains=name)
 
     context = {
-        "author_name": author_name,
+        "name": name,
         "books": books,
     }
 
