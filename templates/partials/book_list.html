@@ -4,7 +4,7 @@
         <div class="card border-0 rounded-3 shadow-sm mb-4">
             <img src="{{book.image}}" class="card-img-top contain" height="300px" alt="{{book.title}}">
             <div class="card-body">
-              <h5 class="card-title text-truncate">{{book.title}}</h5>
+              <h5 class="card-title text-truncate">{{book.title|title}}</h5>
               <p class="card-text text-truncate">
                   {{ book.authors.all|join:", "}}  
               </p>

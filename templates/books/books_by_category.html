@@ -1,12 +1,13 @@
 {% extends "../base.html" %}
 {% block content %}
 
-<h2>Books in {{ genre_name }}</h2>
+<h2>Books in {{ category_name }}</h2>
+<hr>
 
 {% if books %}
     {% include "../partials/book_list.html" %}
 {% else %}
-    <p>No books found in {{ genre_name }}.</p>
+    <p>No books found in {{ category_name }}.</p>
 {% endif %}
 
 {% endblock content %}

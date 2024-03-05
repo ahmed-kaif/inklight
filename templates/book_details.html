@@ -8,7 +8,7 @@
   </div>
   <div class="col-md-9 col-12">
     <!-- Book Details -->
-    <h2>{{book.title}}</h2>
+    <h2>{{book.title|title}}</h2>
     <div class="mt-3">
       <h6>
         <strong>Authors:</strong>
@@ -19,7 +19,7 @@
       <h6><strong>Published At:</strong> {{book.published_at}}</h6>
       <hr />
       {% for category in book.categories.all %}
-      <span class="badge rounded-pill bg-dark py-2">{{category.name}}</span>
+      <a class="badge rounded-pill bg-dark py-2 text-decoration-none text-white" href="{% url 'books_by_category' category_name=category %}">{{category.name}}</a>
       {% endfor %}
     </div>
   </div>

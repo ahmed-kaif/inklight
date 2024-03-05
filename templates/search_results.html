@@ -5,6 +5,7 @@
 
 {% block content %}
     <h2>Search Results</h2>
+    <hr>
     <form method="get" action="{% url 'search_books' %}">
         {{ form|crispy }}
         <button type="submit" class="btn btn-warning">Search</button>
@@ -12,7 +13,7 @@
 
     {% if results %}
     <div class="text-center">
-        Found {{results|length}} Results
+        Found {{results|length}} Result{{results|pluralize}}
     </div>
     <hr>
     <div class="row mt-3">

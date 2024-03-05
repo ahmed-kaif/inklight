@@ -120,7 +120,6 @@ def search_books(request):
 
 def author_list(request):
     authors = Author.objects.all()
-    print(authors)
     context = {
         "authors": authors,
     }
@@ -149,7 +148,7 @@ def books_by_author(request, name):
 
 def books_by_category(request, category_name):
     # Retrieve books based on genre name
-    books = Book.objects.filter(categorys__name__icontains=category_name)
+    books = Book.objects.filter(categories__name__icontains=category_name)
 
     context = {
         "category_name": category_name,

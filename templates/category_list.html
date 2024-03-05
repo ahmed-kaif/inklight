@@ -1,11 +1,16 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <ul>
+    <h2>All Genres</h2>
+    <hr>
+    <div class="row">
         {% for category in categories %}
-            <li>{{category.name}}</li>
+        <div class="col-12 col-md-3 mb-2">
+            {% include "./partials/category.html" with category=category %}
+        </div>
+            {% comment %} <li><a href="{% url 'books_by_category' category_name=category.name %}" class="text-decoration-none" >{{category.name}}</a></li> {% endcomment %}
         {% endfor %}
     
-    </ul>    
+    </div>    
 {% endblock content %}
 
