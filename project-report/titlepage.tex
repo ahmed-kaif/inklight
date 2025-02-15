@@ -1,0 +1,63 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage{graphicx}
+\usepackage[a4paper,top=2cm,bottom=3cm]{geometry}
+\usepackage{tgpagella}
+\usepackage{multimedia}
+\usepackage{multimediasymbols}
+\usepackage{parskip}
+\usepackage{hyperref}
+
+% university
+\newcommand{\univ}{Rajshahi University of Engineering \& Technology}
+% department
+\newcommand{\thedept}{Department of Computer Science \& Engineering}
+% Course title
+\newcommand{\thecourse}{Software Development Project I}
+% Lab report Title
+\newcommand{\thetitle}{Enhanced Book Review Platform with Sentiment Analysis and Personalized Recommendations}
+% Author
+\newcommand{\theauthor}{Kaif Ahmed Khan}
+% Teacher
+\newcommand{\thesupervisor}{Rizoan Toufiq}
+
+\newcommand{\asp}{Assistant Professor}
+\newcommand{\prof}{Professor}
+\newcommand{\lec}{Lecturer}
+
+\newcommand{\thedesignation}{\asp}
+
+\begin{document}
+%%%%%% Title page %%%%%%%
+\begin{titlepage}
+\centering
+{\scshape Heavens' Light is Our Guide\par}\vspace{.25cm}
+\includegraphics[width=0.25\textwidth]{logo.png}\par\vspace{1cm}
+{\scshape\LARGE \univ\par}
+\vspace{.5cm}
+{\scshape\Large \thedept\par}
+\vspace{1cm}
+{\scshape\Large Cse 2100\par}
+{\scshape\Large \thecourse\par}
+\vspace{1cm}
+{\Large\bfseries \thetitle\par}
+\vspace{1cm}
+Submitted by\par
+{\large \theauthor\par}
+{\large Roll: 2103163\par}
+{\large \thedept\par}
+\vfill
+Submitted to\par
+{\large \thesupervisor\\\thedesignation\par}
+{\large \thedept\par}
+\vfill
+% Bottom of the page
+{\large \today\par}
+\end{titlepage}
+\pagenumbering{roman}
+\tableofcontents
+\newpage
+\listoffigures
+%%%% Add Lab Pages %%%%
+\pagenumbering{arabic}
+\include{./document.tex}
+\end{document}

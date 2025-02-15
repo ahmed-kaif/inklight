@@ -1,0 +1,119 @@
+\documentclass{beamer}
+\usepackage{multimedia}
+\usepackage{multimediasymbols}
+\usepackage{graphicx}
+\usepackage{hyperref}
+%Information to be included in the title page:
+\usetheme{Copenhagen}
+\setbeamertemplate{headline}{}
+
+\title{InkLight}
+\subtitle{A Book Reviewing Website}
+\author{Kaif Ahmed Khan\\ ID: 2103163}
+\institute{Rajshahi University of Engineering \& Technology\\
+Department of Computer Science \& Engineering
+}
+\date{\footnotesize May 18, 2024}
+
+\begin{document}
+	
+	\begin{frame}
+		\titlepage
+	\end{frame}
+	\section*{Outline}
+	\begin{frame}{Outline}
+		\tableofcontents
+	\end{frame}
+	\section{Overview}
+	\section{Tools}
+	\section{Techniques}
+	\section{Video}
+
+	\begin{frame}
+		\frametitle{Overview}
+		\begin{block}{Objective}
+			Make people more engaged with books and help analyze book reviews more easily.
+		\end{block}
+		\vspace{0.5cm}
+		Key Features:
+		\begin{itemize}
+			\item Review System
+			\item Searching
+			\item Review Sentiment Analysis
+		\end{itemize}
+		
+		
+	\end{frame}
+	
+	\begin{frame}
+		\frametitle{Tools}
+		\begin{enumerate}
+			\item Backend Framework: Django
+			    \vspace{0.5cm}
+			\item Frontend CSS Framework: Bootstrap
+			    \vspace{0.5cm}
+			\item Database: Sqlite
+			    \vspace{0.5cm}
+			\item Version Control: Git \& Github
+		\end{enumerate}
+	\end{frame}
+	
+	\begin{frame}{Techniques}
+		\begin{itemize}
+			\item Dataset Preparation
+				\vspace{0.5cm}
+			\item Book Search Implementation
+				\vspace{0.5cm}
+			\item Sentiment Analysis
+		\end{itemize}
+	\end{frame}
+	
+\begin{frame}{Dataset Preparation}
+	\includegraphics[width=\textwidth]{schema.png}
+\end{frame}
+	
+	\begin{frame}{Sentiment Analysis}
+		 \begin{columns}[T]
+			\begin{column}{.5\textwidth}
+				\begin{block}{Common Libraries}
+					NLTK, TextBlob, spaCy, RoBERTa\
+				\end{block}
+				\vspace{0.5cm}
+				\begin{block}{My choice}
+					TextBlob
+				\end{block}
+			\end{column}
+			\begin{column}{.5\textwidth}
+					\includegraphics[width=\textwidth]{textblob.png}
+			\end{column}
+		\end{columns}
+		
+	\end{frame}
+	
+	\begin{frame}{Video}
+		\centering
+		\movie[externalviewer]{\includegraphics[width=\textwidth,keepaspectratio]{video.png}}{video.mp4}
+	\end{frame}
+	
+	\begin{frame}{Future Works}
+		\begin{itemize}
+			\item Recommender System Implementation
+			\vspace{0.5cm}
+			\item More Accurate Sentiment Analysis
+			\vspace{0.5cm}
+			\item Bangla Natural Language Processing
+		\end{itemize}
+	\end{frame}
+	
+	
+	\begin{frame}{Conclusion}
+		Project Codebase:
+		\url{https://github.com/ahmed-kaif/inklight}
+	\end{frame}
+	
+\begin{frame}{QNA}
+\includegraphics[width=\textwidth]{qna.png}
+\end{frame}
+	
+
+\end{document}
